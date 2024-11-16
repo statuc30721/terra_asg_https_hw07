@@ -1,1 +1,1 @@
-Homework 07 with ASG and HTTPS.
+Homework 07 with ASG, HTTP and HTTPS.

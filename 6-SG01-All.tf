@@ -75,3 +75,32 @@ resource "aws_security_group" "ASG01-sg02-LB01" {
         Planet = "Arda"
     }
 }
+
+resource "aws_security_group" "ASG01-sg03-443" {
+    name = "ASG01-sg03-443"
+    description = "Allow HTTPS traffic to production servers"
+    vpc_id = aws_vpc.ASG01-VPC.id
+
+        ingress {
+        description = "HTTS"
+        from_port = 443
+        to_port = 443
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+
+    egress {
+        from_port   = 0
+        to_port     = 0
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+  }
+
+    tags = {
+        Name = "ASG01-sg03-443"
+        Service = "application1"
+        Owner = "Frodo"
+        Planet = "Arda"
+    }
+}

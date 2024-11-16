@@ -31,6 +31,32 @@ resource "aws_lb_listener" "http" {
 }
 
 
+#--------------------------------------------#
+# HTTPS Setup
+
+
+# Identify SSL certificate for domain name.
+data "aws_acm_certificate" "certificate" {
+  domain = "alldevsecops.com"
+  statuses = ["ISSUED"]
+  most_recent = true
+}
+
+# Secondary listener for HTTPS traffic.
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.ASG01-LB01.arn
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+  certificate_arn = data.aws_acm_certificate.certificate.arn
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.ASG02_TG01.arn
+  }
+}
+
+
 output "lb_dns_name" {
   value       = aws_lb.ASG01-LB01.dns_name
   description = "The DNS name of the App1 Load Balancer."

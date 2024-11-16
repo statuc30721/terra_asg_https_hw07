@@ -26,10 +26,10 @@ resource "aws_lb_target_group" "ASG01_TG01" {
 
 # Target group for traffic between load balancer and HTTPS
 # Servers.
-resource "aws_lb_target_group" "ASG01_TG02" {
-  name     = "ASG01-443-target-group"
-  port     = 80
-  protocol = "HTTP"
+resource "aws_lb_target_group" "ASG02_TG01" {
+  name     = "ASG02-443-target-group"
+  port     = 443
+  protocol = "HTTPS"
   vpc_id   = aws_vpc.ASG01-VPC.id
   target_type = "instance"
 
@@ -37,7 +37,7 @@ resource "aws_lb_target_group" "ASG01_TG02" {
     enabled             = true
     interval            = 30
     path                = "/"
-    protocol            = "HTTP"
+    protocol            = "HTTPS"
     healthy_threshold   = 5
     unhealthy_threshold = 2
     timeout             = 5
@@ -45,7 +45,7 @@ resource "aws_lb_target_group" "ASG01_TG02" {
   }
 
   tags = {
-    Name    = "ASG01-TG02"
+    Name    = "ASG02-TG01"
     Service = "ASG01"
     Owner   = "Frodo"
     Project = "Web Service"

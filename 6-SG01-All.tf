@@ -78,13 +78,13 @@ resource "aws_security_group" "ASG01-sg02-LB01" {
 
 resource "aws_security_group" "ASG01-sg03-443" {
     name = "ASG01-sg03-443"
-    description = "Allow HTTPS traffic to production servers"
+    description = "Allow traffic between the load balancer and production servers"
     vpc_id = aws_vpc.ASG01-VPC.id
 
         ingress {
-        description = "HTTS"
-        from_port = 443
-        to_port = 443
+        description = "HTTP"
+        from_port = 80
+        to_port = 80
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }

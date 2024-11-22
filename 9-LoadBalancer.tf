@@ -37,7 +37,7 @@ resource "aws_lb_listener" "http" {
 
 # Identify SSL certificate for domain name.
 data "aws_acm_certificate" "certificate" {
-  domain = "alldevsecops.com"
+  domain = "app1.devlab405.click"
   statuses = ["ISSUED"]
   most_recent = true
 }

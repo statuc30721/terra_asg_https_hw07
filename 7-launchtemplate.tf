@@ -57,7 +57,7 @@ resource "aws_launch_template" "app1_LT_443" {
     image_id = data.aws_ami.latest-amazon-linux-image.id
     instance_type = "t2.micro"
     vpc_security_group_ids = [aws_security_group.ASG01-sg03-443.id]
-    key_name = "linux-app1-443-server"
+    key_name = "linux-app1-server"
 
 # Install software on the Amazon EC2 Instance.
 # This calls a local script which runs on each EC2 VM instance.
